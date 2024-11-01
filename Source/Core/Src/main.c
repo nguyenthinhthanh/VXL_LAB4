@@ -103,7 +103,9 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   SCH_Init();
-  SCH_Add_Task(blinkingLed, 3000, 1000);
+  SCH_Add_Task(blinkingLed, 3000, 500, 0);
+
+  HAL_TIM_Base_Start_IT(&htim2);
 
   while (1)
   {

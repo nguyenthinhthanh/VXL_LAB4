@@ -13,7 +13,7 @@
 #include "Timer.h"
 
 #define NO_TASK_ID			0
-#define MAX_SCHEDULE_TASK	40
+#define MAX_SCHEDULE_TASK	10
 
 typedef struct {
 	void (*pTask)(void);
@@ -32,7 +32,9 @@ typedef struct Node {
 
 void SCH_Init(void);
 
-void SCH_Add_Task(void(*pTask)(void), uint32_t Delay, uint32_t Period);
+void SCH_Add_Task(void(*pTask)(void), uint32_t Delay, uint32_t Period, uint32_t RunMe);
+
+void SCH_ReAdd_Task(void(*pTask)(void), uint32_t Delay, uint32_t Period, uint32_t RunMe);
 
 void SCH_Update(void);
 

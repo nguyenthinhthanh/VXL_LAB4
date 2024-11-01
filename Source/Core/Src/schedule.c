@@ -14,13 +14,13 @@ sTasks SCH_Tasks[MAX_SCHEDULE_TASK];
 /*We implement linking list for O(1) SCH_Update*/
 Node_t* taskList;
 
-Node_t* createTaskNode(void(*pTask)(),uint32_t Delay, uint32_t Period){
+Node_t* createTaskNode(void(*pTask)(void),uint32_t Delay, uint32_t Period, uint32_t RunMe){
 	Node_t* new_node = (Node_t*)malloc(sizeof(Node_t));
 
 	new_node->Task.pTask = pTask;
-	new_node->Task.Delay = Delay / TIMER_CYCLE;
-	new_node->Task.Period = Period / TIMER_CYCLE;
-	new_node->Task.RunMe = 0;
+	new_node->Task.Delay = Delay;
+	new_node->Task.Period = Period;
+	new_node->Task.RunMe = RunMe;
 	//new_node->Task.TaskId = -1;
 
 	new_node->next = NULL;
@@ -34,10 +34,10 @@ void SCH_Init(void){
 	Task_Index = 0;
 }
 
-void SCH_Add_Task(void(*pTask)(void), uint32_t Delay, uint32_t Period){
+void SCH_Add_Task(void(*pTask)(void), uint32_t Delay, uint32_t Period, uint32_t RunMe){
 	Node_t* tmp_node = taskList;
 	Node_t* prev_node = NULL;
-	Node_t* new_node = createTaskNode(pTask, Delay, Period);
+	Node_t* new_node = createTaskNode(pTask, Delay / TIMER_CYCLE, Period / TIMER_CYCLE, RunMe);
 
 	/*Linking list is empty*/
 	if(tmp_node == NULL){
@@ -51,6 +51,9 @@ void SCH_Add_Task(void(*pTask)(void), uint32_t Delay, uint32_t Period){
 
 			prev_node = tmp_node;
 			tmp_node = tmp_node->next;
+		}
+		else{
+			break;
 		}
 	}
 
@@ -70,19 +73,44 @@ void SCH_Add_Task(void(*pTask)(void), uint32_t Delay, uint32_t Period){
 	}
 }
 
-/*void SCH_Add_Task(void(*pTask)(void), uint32_t Delay, uint32_t Period){
-	if(Task_Index < MAX_SCHEDULE_TASK){
-		SCH_Tasks[Task_Index].pTask = pTask;
+void SCH_ReAdd_Task(void(*pTask)(void), uint32_t Delay, uint32_t Period, uint32_t RunMe){
+	Node_t* tmp_node = taskList;
+	Node_t* prev_node = NULL;
+	Node_t* new_node = createTaskNode(pTask, Delay, Period, RunMe);
 
-		SCH_Tasks[Task_Index].Delay = Delay / TIMER_CYCLE;
-		SCH_Tasks[Task_Index].Period = Period / TIMER_CYCLE;
-		SCH_Tasks[Task_Index].RunMe = 0;
-
-		SCH_Tasks[Task_Index].TaskId = Task_Index;
-
-		Task_Index = Task_Index + 1;
+	/*Linking list is empty*/
+	if(tmp_node == NULL){
+		taskList = new_node;
+		return;
 	}
-}*/
+
+	while(tmp_node != NULL){
+		if(new_node->Task.Delay > tmp_node->Task.Delay){
+			new_node->Task.Delay = new_node->Task.Delay - tmp_node->Task.Delay;
+
+			prev_node = tmp_node;
+			tmp_node = tmp_node->next;
+		}
+		else{
+			break;
+		}
+	}
+
+	if(prev_node == NULL){
+		/*First node head, add to head*/
+		new_node->next = tmp_node;
+		taskList = new_node;
+	}
+	else if(prev_node != NULL && tmp_node == NULL){
+		/*Tail node, add to tail*/
+		prev_node->next = new_node;
+	}
+	else{
+		/*Add in mid*/
+		prev_node->next = new_node;
+		new_node->next = tmp_node;
+	}
+}
 
 void SCH_Update(void){
 	if(taskList == NULL){
@@ -100,18 +128,6 @@ void SCH_Update(void){
 	}
 }
 
-/*void SCH_Update(void){
-	for(int i = 0;i < Task_Index; i++){
-		if(SCH_Tasks[i].Delay > 0){
-			SCH_Tasks[i].Delay--;
-		}
-		else{
-			SCH_Tasks[i].Delay = SCH_Tasks[i].Period;
-			SCH_Tasks[i].RunMe = SCH_Tasks[i].RunMe + 1;
-		}
-	}
-}*/
-
 void SCH_Dispatch_Task(void){
 	Node_t* tmp = taskList;
 
@@ -124,19 +140,16 @@ void SCH_Dispatch_Task(void){
 
 		tmp->Task.RunMe = tmp->Task.RunMe - 1;
 
+		/*Store task before delete*/
+		void(*pTask)(void) = tmp->Task.pTask;
+		uint32_t Delay = tmp->Task.Delay;
+		uint32_t Period = tmp->Task.Period;
+		uint32_t RunMe = tmp->Task.RunMe;
+
 		SCH_Delete_Task();
-		SCH_Add_Task(tmp->Task.pTask, tmp->Task.Delay, tmp->Task.Period);
+		SCH_ReAdd_Task(pTask, Delay, Period, RunMe);
 	}
 }
-
-/*void SCH_Dispatch_Task(void){
-	for(int i = 0;i < Task_Index; i++){
-		if(SCH_Tasks[i].RunMe > 0){
-			SCH_Tasks[i].RunMe = SCH_Tasks[i].RunMe - 1;
-			(*SCH_Tasks[i].pTask)();
-		}
-	}
-}*/
 
 void SCH_Delete_Task(void){
 	/*Delete head node because we using linking list*/
@@ -149,3 +162,5 @@ void SCH_Delete_Task(void){
 
 	free(tmp);
 }
+
+
