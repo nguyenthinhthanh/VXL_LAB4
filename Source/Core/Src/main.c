@@ -115,8 +115,7 @@ int main(void)
 
   SCH_Add_Task(Task1, 0, 500, 0);
   SCH_Add_Task(Task2, 0, 3000, 0);
-  SCH_Add_Task(Task3, 0, 5000, 0);
-  //get_List();
+  SCH_Add_Task(Task3, 2000, 0, 0);
 
   HAL_TIM_Base_Start_IT(&htim2);
   while (1)
