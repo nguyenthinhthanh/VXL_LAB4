@@ -196,17 +196,23 @@ void SCH_Dispatch_Task(void){
 	if(tmp->Task.RunMe > 0){
 		tmp->Task.RunMe = tmp->Task.RunMe - 1;
 
+		(*tmp->Task.pTask)();
+
 		/*Store task before delete*/
 		void(*pTask)(void) = tmp->Task.pTask;
 		uint32_t Delay = tmp->Task.Delay;
 		uint32_t Period = tmp->Task.Period;
 		uint32_t RunMe = tmp->Task.RunMe;
 
-		//SCH_ReAdd_Task(tmp->Task.pTask, tmp->Task.Delay, tmp->Task.Period, tmp->Task.RunMe);
-		SCH_Delete_Task();
-		SCH_ReAdd_Task(pTask, Delay, Period, RunMe);
-
-		(*tmp->Task.pTask)();
+		if(tmp->Task.Period == 0){
+			/*Oneshot task*/
+			SCH_Delete_Task();
+		}
+		else{
+			//SCH_ReAdd_Task(tmp->Task.pTask, tmp->Task.Delay, tmp->Task.Period, tmp->Task.RunMe);
+			SCH_Delete_Task();
+			SCH_ReAdd_Task(pTask, Delay, Period, RunMe);
+		}
 	}
 
 	SCH_Report_Status();
