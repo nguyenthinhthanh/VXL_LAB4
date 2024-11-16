@@ -10,10 +10,15 @@
 
 #include <stdint.h>
 #include <stdlib.h>
+
+#include "main.h"
 #include "Timer.h"
+#include "error.h"
 
 #define NO_TASK_ID			0
 #define MAX_SCHEDULE_TASK	10
+
+extern int arr[20];
 
 typedef struct {
 	void (*pTask)(void);
@@ -41,5 +46,9 @@ void SCH_Update(void);
 void SCH_Dispatch_Task(void);
 
 void SCH_Delete_Task(void);
+
+void SCH_Report_Status(void);
+
+void get_List(void);
 
 #endif /* INC_SCHEDULE_H_ */

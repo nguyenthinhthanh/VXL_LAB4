@@ -59,8 +59,38 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define LED_PA5_Pin GPIO_PIN_5
 #define LED_PA5_GPIO_Port GPIOA
+#define LED_PA6_Pin GPIO_PIN_6
+#define LED_PA6_GPIO_Port GPIOA
+#define LED_PA7_Pin GPIO_PIN_7
+#define LED_PA7_GPIO_Port GPIOA
+#define ERROR_0_Pin GPIO_PIN_0
+#define ERROR_0_GPIO_Port GPIOB
+#define ERROR_1_Pin GPIO_PIN_1
+#define ERROR_1_GPIO_Port GPIOB
+#define ERROR_2_Pin GPIO_PIN_2
+#define ERROR_2_GPIO_Port GPIOB
+#define ERROR_3_Pin GPIO_PIN_3
+#define ERROR_3_GPIO_Port GPIOB
+#define ERROR_4_Pin GPIO_PIN_4
+#define ERROR_4_GPIO_Port GPIOB
+#define ERROR_5_Pin GPIO_PIN_5
+#define ERROR_5_GPIO_Port GPIOB
+#define ERROR_6_Pin GPIO_PIN_6
+#define ERROR_6_GPIO_Port GPIOB
+#define ERROR_7_Pin GPIO_PIN_7
+#define ERROR_7_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
+
+// Comment this line out if error reporting isNOT required
+#define SCH_REPORT_ERRORS
+//Where error reporting is required, the port onwhich error codes will be displayed
+//is also determined viamain.h:
+#ifdef SCH_REPORT_ERRORS
+// The port onwhich error codes will be displayed
+//ONLYUSEDIFERRORSAREREPORTED
+#define Error_port GPIOB
+#endif
 
 /* USER CODE END Private defines */
 

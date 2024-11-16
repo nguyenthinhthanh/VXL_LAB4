@@ -1,7 +1,9 @@
-../Core/Src/schedule.c:17:9:createTaskNode	32	static
-../Core/Src/schedule.c:31:6:SCH_Init	4	static
-../Core/Src/schedule.c:37:6:SCH_Add_Task	40	static
-../Core/Src/schedule.c:76:6:SCH_ReAdd_Task	40	static
-../Core/Src/schedule.c:115:6:SCH_Update	16	static
-../Core/Src/schedule.c:131:6:SCH_Dispatch_Task	32	static
-../Core/Src/schedule.c:154:6:SCH_Delete_Task	16	static
+../Core/Src/schedule.c:19:9:createTaskNode	32	static
+../Core/Src/schedule.c:33:6:SCH_Init	4	static
+../Core/Src/schedule.c:42:6:SCH_Add_Task	40	static
+../Core/Src/schedule.c:106:6:SCH_ReAdd_Task	40	static
+../Core/Src/schedule.c:171:6:SCH_Update	16	static
+../Core/Src/schedule.c:189:6:SCH_Dispatch_Task	32	static
+../Core/Src/schedule.c:215:6:SCH_Delete_Task	16	static
+../Core/Src/schedule.c:230:6:SCH_Report_Status	4	static
+../Core/Src/schedule.c:257:6:get_List	16	static

@@ -51,18 +51,25 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
-void blinkingLed(void);
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void blinkingLed(void){
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+	SCH_Update();
+}
+
+void Task1(void){
 	HAL_GPIO_TogglePin(LED_PA5_GPIO_Port, LED_PA5_Pin);
 }
 
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
-	SCH_Update();
+void Task2(void){
+	HAL_GPIO_TogglePin(LED_PA6_GPIO_Port, LED_PA6_Pin);
+}
+
+void Task3(void){
+	HAL_GPIO_TogglePin(LED_PA7_GPIO_Port, LED_PA7_Pin);
 }
 /* USER CODE END 0 */
 
@@ -102,11 +109,16 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  //__HAL_RCC_GPIOB_CLK_ENABLE();
+
   SCH_Init();
-  SCH_Add_Task(blinkingLed, 3000, 500, 0);
+
+  SCH_Add_Task(Task1, 0, 500, 0);
+  SCH_Add_Task(Task2, 0, 3000, 0);
+  SCH_Add_Task(Task3, 0, 5000, 0);
+  //get_List();
 
   HAL_TIM_Base_Start_IT(&htim2);
-
   while (1)
   {
 	 SCH_Dispatch_Task();
@@ -211,16 +223,30 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LED_PA5_GPIO_Port, LED_PA5_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LED_PA5_Pin|LED_PA6_Pin|LED_PA7_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : LED_PA5_Pin */
-  GPIO_InitStruct.Pin = LED_PA5_Pin;
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, ERROR_0_Pin|ERROR_1_Pin|ERROR_2_Pin|ERROR_3_Pin
+                          |ERROR_4_Pin|ERROR_5_Pin|ERROR_6_Pin|ERROR_7_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : LED_PA5_Pin LED_PA6_Pin LED_PA7_Pin */
+  GPIO_InitStruct.Pin = LED_PA5_Pin|LED_PA6_Pin|LED_PA7_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LED_PA5_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : ERROR_0_Pin ERROR_1_Pin ERROR_2_Pin ERROR_3_Pin
+                           ERROR_4_Pin ERROR_5_Pin ERROR_6_Pin ERROR_7_Pin */
+  GPIO_InitStruct.Pin = ERROR_0_Pin|ERROR_1_Pin|ERROR_2_Pin|ERROR_3_Pin
+                          |ERROR_4_Pin|ERROR_5_Pin|ERROR_6_Pin|ERROR_7_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
