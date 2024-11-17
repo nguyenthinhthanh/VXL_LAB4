@@ -21,6 +21,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "7Seg.h"
+#include "Traffic.h"
 #include "schedule.h"
 /* USER CODE END Includes */
 
@@ -58,18 +60,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 /* USER CODE BEGIN 0 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	SCH_Update();
-}
-
-void Task1(void){
-	HAL_GPIO_TogglePin(LED_PA5_GPIO_Port, LED_PA5_Pin);
-}
-
-void Task2(void){
-	HAL_GPIO_TogglePin(LED_PA6_GPIO_Port, LED_PA6_Pin);
-}
-
-void Task3(void){
-	HAL_GPIO_TogglePin(LED_PA7_GPIO_Port, LED_PA7_Pin);
 }
 /* USER CODE END 0 */
 
@@ -113,9 +103,9 @@ int main(void)
 
   SCH_Init();
 
-  SCH_Add_Task(Task1, 0, 500, 0);
-  SCH_Add_Task(Task2, 0, 3000, 0);
-  SCH_Add_Task(Task3, 0, 5000, 0);
+  SCH_Add_Task(runLed, 0, 500, 0);
+  SCH_Add_Task(run7Seg, 0, 500, 0);
+  SCH_Add_Task(runTraffic, 1000, 1000, 0);
   //get_List();
 
   HAL_TIM_Base_Start_IT(&htim2);
@@ -226,23 +216,32 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LED_PA5_Pin|LED_PA6_Pin|LED_PA7_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, SEG13_A_Pin|SEG13_B_Pin|SEG13_C_Pin|SEG13_D_Pin
+                          |SEG13_E_Pin|SEG13_F_Pin|SEG13_G_Pin|SEG24_A_Pin
+                          |SEG24_B_Pin|SEG24_C_Pin|SEG24_D_Pin|SEG24_E_Pin
+                          |SEG24_F_Pin|SEG24_G_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, ERROR_0_Pin|ERROR_1_Pin|ERROR_2_Pin|ERROR_3_Pin
-                          |ERROR_4_Pin|ERROR_5_Pin|ERROR_6_Pin|ERROR_7_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, LED13_RED_Pin|LED13_YELLOW_Pin|LED13_GREEN_Pin|LED24_RED_Pin
+                          |LED24_YELLOW_Pin|LED24_GREEN_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : LED_PA5_Pin LED_PA6_Pin LED_PA7_Pin */
-  GPIO_InitStruct.Pin = LED_PA5_Pin|LED_PA6_Pin|LED_PA7_Pin;
+  /*Configure GPIO pins : SEG13_A_Pin SEG13_B_Pin SEG13_C_Pin SEG13_D_Pin
+                           SEG13_E_Pin SEG13_F_Pin SEG13_G_Pin SEG24_A_Pin
+                           SEG24_B_Pin SEG24_C_Pin SEG24_D_Pin SEG24_E_Pin
+                           SEG24_F_Pin SEG24_G_Pin */
+  GPIO_InitStruct.Pin = SEG13_A_Pin|SEG13_B_Pin|SEG13_C_Pin|SEG13_D_Pin
+                          |SEG13_E_Pin|SEG13_F_Pin|SEG13_G_Pin|SEG24_A_Pin
+                          |SEG24_B_Pin|SEG24_C_Pin|SEG24_D_Pin|SEG24_E_Pin
+                          |SEG24_F_Pin|SEG24_G_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : ERROR_0_Pin ERROR_1_Pin ERROR_2_Pin ERROR_3_Pin
-                           ERROR_4_Pin ERROR_5_Pin ERROR_6_Pin ERROR_7_Pin */
-  GPIO_InitStruct.Pin = ERROR_0_Pin|ERROR_1_Pin|ERROR_2_Pin|ERROR_3_Pin
-                          |ERROR_4_Pin|ERROR_5_Pin|ERROR_6_Pin|ERROR_7_Pin;
+  /*Configure GPIO pins : LED13_RED_Pin LED13_YELLOW_Pin LED13_GREEN_Pin LED24_RED_Pin
+                           LED24_YELLOW_Pin LED24_GREEN_Pin */
+  GPIO_InitStruct.Pin = LED13_RED_Pin|LED13_YELLOW_Pin|LED13_GREEN_Pin|LED24_RED_Pin
+                          |LED24_YELLOW_Pin|LED24_GREEN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

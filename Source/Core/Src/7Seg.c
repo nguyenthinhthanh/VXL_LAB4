@@ -1,112 +1,11 @@
 /*
- * led_display.c
+ * 7Seg.c
  *
- *  Created on: Oct 2, 2024
+ *  Created on: Sep 28, 2024
  *      Author: ADMINS
  */
 
-#include "led_display.h"
-
-const int MAX_LED = 4;
-
-int Led13_Count;
-int Led24_Count;
-
-int index_led = 0;
-int led_buffer[4] = {5,0,0,3};
-
-void updateLedBuffer(int index, int value){
-	led_buffer[index] = value;
-}
-
-void disable7SEG(int index){
-	if(index == 0){
-		HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, GPIO_PIN_SET);
-	}
-	else if(index == 1){
-		HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, GPIO_PIN_SET);
-	}
-	else if(index == 2){
-		HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, GPIO_PIN_SET);
-	}
-	else if(index == 3){
-		HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, GPIO_PIN_SET);
-	}
-	else{
-
-	}
-}
-
-void enable7SEGNoClear(int index){
-	if(index == 0){
-		HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, GPIO_PIN_RESET);
-	}
-	else if(index == 1){
-		HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, GPIO_PIN_RESET);
-	}
-	else if(index == 2){
-		HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, GPIO_PIN_RESET);
-	}
-	else if(index == 3){
-		HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, GPIO_PIN_RESET);
-	}
-	else{
-
-	}
-}
-
-void enable7SEG(int index){
-	if(index == 0){
-		HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, GPIO_PIN_SET);
-	}
-	else if(index == 1){
-		HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, GPIO_PIN_SET);
-	}
-	else if(index == 2){
-		HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, GPIO_PIN_SET);
-	}
-	else if(index == 3){
-		HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, GPIO_PIN_RESET);
-	}
-	else{
-
-	}
-}
-
-void display7SEG(int index){
-	switch(index){
-	case 0:
-		enable7SEG(index);
-		display7SEG_13(led_buffer[index]);
-		break;
-	case 1:
-		enable7SEG(index);
-		display7SEG_13(led_buffer[index]);
-		break;
-	case 2:
-		enable7SEG(index);
-		display7SEG_24(led_buffer[index]);
-		break;
-	case 3:
-		enable7SEG(index);
-		display7SEG_24(led_buffer[index]);
-		break;
-	default:
-		break;
-	}
-}
+#include "7Seg.h"
 
 void display7SEG_13(int number){
 	if(number == 0){
@@ -329,14 +228,6 @@ void display7SEG_24(int number){
 }
 
 void run7Seg(void){
-	if(getTimerFlags(SEVENT_SEG_SCAN_TIMER)){
-		display7SEG(index_led);
-
-		index_led++;
-		if(index_led >= MAX_LED){
-			index_led = 0;
-		}
-
-		setTimer(SEVENT_SEG_SCAN_TIMER, DURATION_FOR_SEVENT_SEG_SCAN_LED);
-	}
+	display7SEG_13(Led13_Count);
+	display7SEG_24(Led24_Count);
 }

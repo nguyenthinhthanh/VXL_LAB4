@@ -1,0 +1,6 @@
+../Core/Src/Traffic.c:16:6:doRedGreen_Traffic	8	static
+../Core/Src/Traffic.c:28:6:doRedYellow_Traffic	8	static
+../Core/Src/Traffic.c:34:6:doGreenRed_Traffic	8	static
+../Core/Src/Traffic.c:44:6:doYellowRed_Traffic	8	static
+../Core/Src/Traffic.c:52:6:runLed	8	static
+../Core/Src/Traffic.c:70:6:runTraffic	4	static

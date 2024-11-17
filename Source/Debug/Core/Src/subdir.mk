@@ -5,6 +5,8 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../Core/Src/7Seg.c \
+../Core/Src/Traffic.c \
 ../Core/Src/error.c \
 ../Core/Src/main.c \
 ../Core/Src/schedule.c \
@@ -17,6 +19,8 @@ C_SRCS += \
 ../Core/Src/watch_dog.c 
 
 OBJS += \
+./Core/Src/7Seg.o \
+./Core/Src/Traffic.o \
 ./Core/Src/error.o \
 ./Core/Src/main.o \
 ./Core/Src/schedule.o \
@@ -29,6 +33,8 @@ OBJS += \
 ./Core/Src/watch_dog.o 
 
 C_DEPS += \
+./Core/Src/7Seg.d \
+./Core/Src/Traffic.d \
 ./Core/Src/error.d \
 ./Core/Src/main.d \
 ./Core/Src/schedule.d \
@@ -48,7 +54,7 @@ Core/Src/%.o Core/Src/%.su Core/Src/%.cyclo: ../Core/Src/%.c Core/Src/subdir.mk
 clean: clean-Core-2f-Src
 
 clean-Core-2f-Src:
-	-$(RM) ./Core/Src/error.cyclo ./Core/Src/error.d ./Core/Src/error.o ./Core/Src/error.su ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/schedule.cyclo ./Core/Src/schedule.d ./Core/Src/schedule.o ./Core/Src/schedule.su ./Core/Src/stm32f1xx_hal_msp.cyclo ./Core/Src/stm32f1xx_hal_msp.d ./Core/Src/stm32f1xx_hal_msp.o ./Core/Src/stm32f1xx_hal_msp.su ./Core/Src/stm32f1xx_it.cyclo ./Core/Src/stm32f1xx_it.d ./Core/Src/stm32f1xx_it.o ./Core/Src/stm32f1xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.cyclo ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f1xx.cyclo ./Core/Src/system_stm32f1xx.d ./Core/Src/system_stm32f1xx.o ./Core/Src/system_stm32f1xx.su ./Core/Src/timer.cyclo ./Core/Src/timer.d ./Core/Src/timer.o ./Core/Src/timer.su ./Core/Src/watch_dog.cyclo ./Core/Src/watch_dog.d ./Core/Src/watch_dog.o ./Core/Src/watch_dog.su
+	-$(RM) ./Core/Src/7Seg.cyclo ./Core/Src/7Seg.d ./Core/Src/7Seg.o ./Core/Src/7Seg.su ./Core/Src/Traffic.cyclo ./Core/Src/Traffic.d ./Core/Src/Traffic.o ./Core/Src/Traffic.su ./Core/Src/error.cyclo ./Core/Src/error.d ./Core/Src/error.o ./Core/Src/error.su ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/schedule.cyclo ./Core/Src/schedule.d ./Core/Src/schedule.o ./Core/Src/schedule.su ./Core/Src/stm32f1xx_hal_msp.cyclo ./Core/Src/stm32f1xx_hal_msp.d ./Core/Src/stm32f1xx_hal_msp.o ./Core/Src/stm32f1xx_hal_msp.su ./Core/Src/stm32f1xx_it.cyclo ./Core/Src/stm32f1xx_it.d ./Core/Src/stm32f1xx_it.o ./Core/Src/stm32f1xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.cyclo ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f1xx.cyclo ./Core/Src/system_stm32f1xx.d ./Core/Src/system_stm32f1xx.o ./Core/Src/system_stm32f1xx.su ./Core/Src/timer.cyclo ./Core/Src/timer.d ./Core/Src/timer.o ./Core/Src/timer.su ./Core/Src/watch_dog.cyclo ./Core/Src/watch_dog.d ./Core/Src/watch_dog.o ./Core/Src/watch_dog.su
 
 .PHONY: clean-Core-2f-Src
 

@@ -57,28 +57,46 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define LED_PA5_Pin GPIO_PIN_5
-#define LED_PA5_GPIO_Port GPIOA
-#define LED_PA6_Pin GPIO_PIN_6
-#define LED_PA6_GPIO_Port GPIOA
-#define LED_PA7_Pin GPIO_PIN_7
-#define LED_PA7_GPIO_Port GPIOA
-#define ERROR_0_Pin GPIO_PIN_0
-#define ERROR_0_GPIO_Port GPIOB
-#define ERROR_1_Pin GPIO_PIN_1
-#define ERROR_1_GPIO_Port GPIOB
-#define ERROR_2_Pin GPIO_PIN_2
-#define ERROR_2_GPIO_Port GPIOB
-#define ERROR_3_Pin GPIO_PIN_3
-#define ERROR_3_GPIO_Port GPIOB
-#define ERROR_4_Pin GPIO_PIN_4
-#define ERROR_4_GPIO_Port GPIOB
-#define ERROR_5_Pin GPIO_PIN_5
-#define ERROR_5_GPIO_Port GPIOB
-#define ERROR_6_Pin GPIO_PIN_6
-#define ERROR_6_GPIO_Port GPIOB
-#define ERROR_7_Pin GPIO_PIN_7
-#define ERROR_7_GPIO_Port GPIOB
+#define SEG13_A_Pin GPIO_PIN_0
+#define SEG13_A_GPIO_Port GPIOA
+#define SEG13_B_Pin GPIO_PIN_1
+#define SEG13_B_GPIO_Port GPIOA
+#define SEG13_C_Pin GPIO_PIN_2
+#define SEG13_C_GPIO_Port GPIOA
+#define SEG13_D_Pin GPIO_PIN_3
+#define SEG13_D_GPIO_Port GPIOA
+#define SEG13_E_Pin GPIO_PIN_4
+#define SEG13_E_GPIO_Port GPIOA
+#define SEG13_F_Pin GPIO_PIN_5
+#define SEG13_F_GPIO_Port GPIOA
+#define SEG13_G_Pin GPIO_PIN_6
+#define SEG13_G_GPIO_Port GPIOA
+#define SEG24_A_Pin GPIO_PIN_7
+#define SEG24_A_GPIO_Port GPIOA
+#define SEG24_B_Pin GPIO_PIN_8
+#define SEG24_B_GPIO_Port GPIOA
+#define SEG24_C_Pin GPIO_PIN_9
+#define SEG24_C_GPIO_Port GPIOA
+#define SEG24_D_Pin GPIO_PIN_10
+#define SEG24_D_GPIO_Port GPIOA
+#define SEG24_E_Pin GPIO_PIN_11
+#define SEG24_E_GPIO_Port GPIOA
+#define SEG24_F_Pin GPIO_PIN_12
+#define SEG24_F_GPIO_Port GPIOA
+#define SEG24_G_Pin GPIO_PIN_13
+#define SEG24_G_GPIO_Port GPIOA
+#define LED13_RED_Pin GPIO_PIN_3
+#define LED13_RED_GPIO_Port GPIOB
+#define LED13_YELLOW_Pin GPIO_PIN_4
+#define LED13_YELLOW_GPIO_Port GPIOB
+#define LED13_GREEN_Pin GPIO_PIN_5
+#define LED13_GREEN_GPIO_Port GPIOB
+#define LED24_RED_Pin GPIO_PIN_6
+#define LED24_RED_GPIO_Port GPIOB
+#define LED24_YELLOW_Pin GPIO_PIN_7
+#define LED24_YELLOW_GPIO_Port GPIOB
+#define LED24_GREEN_Pin GPIO_PIN_8
+#define LED24_GREEN_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
