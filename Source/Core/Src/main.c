@@ -61,15 +61,15 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 }
 
 void Task1(void){
-	HAL_GPIO_TogglePin(LED_PA5_GPIO_Port, LED_PA5_Pin);
+	HAL_GPIO_TogglePin(LED_PB13_GPIO_Port, LED_PB13_Pin);
 }
 
 void Task2(void){
-	HAL_GPIO_TogglePin(LED_PA6_GPIO_Port, LED_PA6_Pin);
+	HAL_GPIO_TogglePin(LED_PB14_GPIO_Port, LED_PB14_Pin);
 }
 
 void Task3(void){
-	HAL_GPIO_TogglePin(LED_PA7_GPIO_Port, LED_PA7_Pin);
+	HAL_GPIO_TogglePin(LED_PB15_GPIO_Port, LED_PB15_Pin);
 }
 /* USER CODE END 0 */
 
@@ -221,27 +221,19 @@ static void MX_GPIO_Init(void)
 /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LED_PA5_Pin|LED_PA6_Pin|LED_PA7_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, ERROR_0_Pin|ERROR_1_Pin|ERROR_2_Pin|LED_PB13_Pin
+                          |LED_PB14_Pin|LED_PB15_Pin|ERROR_3_Pin|ERROR_4_Pin
+                          |ERROR_5_Pin|ERROR_6_Pin|ERROR_7_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, ERROR_0_Pin|ERROR_1_Pin|ERROR_2_Pin|ERROR_3_Pin
-                          |ERROR_4_Pin|ERROR_5_Pin|ERROR_6_Pin|ERROR_7_Pin, GPIO_PIN_RESET);
-
-  /*Configure GPIO pins : LED_PA5_Pin LED_PA6_Pin LED_PA7_Pin */
-  GPIO_InitStruct.Pin = LED_PA5_Pin|LED_PA6_Pin|LED_PA7_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : ERROR_0_Pin ERROR_1_Pin ERROR_2_Pin ERROR_3_Pin
-                           ERROR_4_Pin ERROR_5_Pin ERROR_6_Pin ERROR_7_Pin */
-  GPIO_InitStruct.Pin = ERROR_0_Pin|ERROR_1_Pin|ERROR_2_Pin|ERROR_3_Pin
-                          |ERROR_4_Pin|ERROR_5_Pin|ERROR_6_Pin|ERROR_7_Pin;
+  /*Configure GPIO pins : ERROR_0_Pin ERROR_1_Pin ERROR_2_Pin LED_PB13_Pin
+                           LED_PB14_Pin LED_PB15_Pin ERROR_3_Pin ERROR_4_Pin
+                           ERROR_5_Pin ERROR_6_Pin ERROR_7_Pin */
+  GPIO_InitStruct.Pin = ERROR_0_Pin|ERROR_1_Pin|ERROR_2_Pin|LED_PB13_Pin
+                          |LED_PB14_Pin|LED_PB15_Pin|ERROR_3_Pin|ERROR_4_Pin
+                          |ERROR_5_Pin|ERROR_6_Pin|ERROR_7_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
