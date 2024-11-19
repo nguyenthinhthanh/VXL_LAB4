@@ -24,6 +24,8 @@
 #include "7Seg.h"
 #include "Traffic.h"
 #include "schedule.h"
+#include "input_reading.h"
+#include "input_processing.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -59,6 +61,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+	button_reading();
 	SCH_Update();
 }
 /* USER CODE END 0 */
@@ -103,6 +106,7 @@ int main(void)
 
   SCH_Init();
 
+  SCH_Add_Task(fsm_for_input_processing, 0, 10, 0);
   SCH_Add_Task(runLed, 0, 500, 0);
   SCH_Add_Task(run7Seg, 0, 500, 0);
   SCH_Add_Task(runTraffic, 1000, 1000, 0);
