@@ -22,6 +22,8 @@
 extern int Led13_Count;
 extern int Led24_Count;
 
+extern int state_traffic;
+
 void doRedGreen_Traffic(void);
 
 void doRedYellow_Traffic(void);

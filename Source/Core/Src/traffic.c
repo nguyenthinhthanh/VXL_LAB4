@@ -11,7 +11,7 @@
 int Led13_Count = 5;
 int Led24_Count = 3;
 
-int state = RED_GREEN_STATE;
+int state_traffic = RED_GREEN_STATE;
 
 void doRedGreen_Traffic(void){
 	HAL_GPIO_WritePin(LED13_RED_GPIO_Port, LED13_RED_Pin, GPIO_PIN_SET);
@@ -50,16 +50,16 @@ void doYellowRed_Traffic(void){
 }
 
 void runLed(void){
-	if(state == RED_GREEN_STATE){
+	if(state_traffic == RED_GREEN_STATE){
 		doRedGreen_Traffic();
 	}
-	else if(state == RED_YELLOW_STATE){
+	else if(state_traffic == RED_YELLOW_STATE){
 		doRedYellow_Traffic();
 	}
-	else if(state == GREEN_RED_STATE){
+	else if(state_traffic == GREEN_RED_STATE){
 		doGreenRed_Traffic();
 	}
-	else if(state == YELLOW_RED_STATE){
+	else if(state_traffic == YELLOW_RED_STATE){
 		doYellowRed_Traffic();
 	}
 	else{
@@ -73,30 +73,30 @@ void runTraffic(void){
 
 	if(Led13_Count == 2 && Led24_Count == 0){
 		Led24_Count = 2;
-		state = RED_YELLOW_STATE;
+		state_traffic = RED_YELLOW_STATE;
 
 		return;
 	}
 
-	if(Led13_Count == 0 && Led24_Count == 0&& state == RED_YELLOW_STATE){
+	if(Led13_Count == 0 && Led24_Count == 0&& state_traffic == RED_YELLOW_STATE){
 		Led13_Count = 3;
 		Led24_Count = 5;
-		state = GREEN_RED_STATE;
+		state_traffic = GREEN_RED_STATE;
 
 		return;
 	}
 
 	if(Led24_Count == 2 && Led13_Count == 0){
-		state = YELLOW_RED_STATE;
+		state_traffic = YELLOW_RED_STATE;
 		Led13_Count = 2;
 
 		return;
 	}
 
-	if(Led13_Count == 0 && Led24_Count == 0&& state == YELLOW_RED_STATE){
+	if(Led13_Count == 0 && Led24_Count == 0&& state_traffic == YELLOW_RED_STATE){
 		Led13_Count = 5;
 		Led24_Count = 3;
-		state = RED_GREEN_STATE;
+		state_traffic = RED_GREEN_STATE;
 
 		return;
 	}

@@ -26,6 +26,7 @@
 #include "schedule.h"
 #include "input_reading.h"
 #include "input_processing.h"
+#include "fsm.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -107,9 +108,16 @@ int main(void)
   SCH_Init();
 
   SCH_Add_Task(fsm_for_input_processing, 0, 10, 0);
-  SCH_Add_Task(runLed, 0, 500, 0);
-  SCH_Add_Task(run7Seg, 0, 500, 0);
+  SCH_Add_Task(run7Seg, 0, 250, 0);
+  //SCH_Add_Task(runBlinkingLed, 0, 10, 0);
+
+  //SCH_Add_Task(runLed, 0, 500, 0);
+  //SCH_Add_Task(run7Seg, 0, 500, 0);
   SCH_Add_Task(runTraffic, 1000, 1000, 0);
+
+  SCH_Add_Task(fsm_automatic, 0, 10, 0);
+  SCH_Add_Task(fsm_manual, 0, 10, 0);
+  SCH_Add_Task(fsm_setting, 0, 10, 0);
   //get_List();
 
   HAL_TIM_Base_Start_IT(&htim2);
