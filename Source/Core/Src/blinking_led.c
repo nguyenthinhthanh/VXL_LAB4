@@ -19,7 +19,7 @@ int Time_LedGreen_Duration_Temp = 1;
 
 void runBlinkingLed(void){
 	/*If mode is 2,3,4*/
-	/*if(FSM_State >= NORMAL_STATE_MODE_2 && FSM_State <= NORMAL_STATE_MODE_4){
+	if(FSM_State >= NORMAL_STATE_MODE_2 && FSM_State <= NORMAL_STATE_MODE_4){
 		if(FSM_State == NORMAL_STATE_MODE_2){
 			activeTimer(BLINKING_LED_RED_TIMER);
 			ignoreTimer(BLINKING_LED_YELLOW_TIMER);
@@ -36,7 +36,7 @@ void runBlinkingLed(void){
 			ignoreTimer(BLINKING_LED_YELLOW_TIMER);
 		}
 		else{
-			This is fault mode
+			/*This is fault mode*/
 		}
 
 
@@ -71,5 +71,5 @@ void runBlinkingLed(void){
 		ignoreTimer(BLINKING_LED_RED_TIMER);
 		ignoreTimer(BLINKING_LED_YELLOW_TIMER);
 		ignoreTimer(BLINKING_LED_GREEN_TIMER);
-	}*/
+	}
 }

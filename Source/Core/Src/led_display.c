@@ -6,6 +6,7 @@
  */
 
 #include "led_display.h"
+#include "fsm.h"
 
 const int MAX_LED = 4;
 
@@ -339,11 +340,12 @@ void run7Seg(void){
 
 		setTimer(SEVENT_SEG_SCAN_TIMER, DURATION_FOR_SEVENT_SEG_SCAN_LED);
 	}*/
+	if(FSM_State >= NORMAL_STATE_MODE_2 && FSM_State <= NORMAL_STATE_MODE_4){
+		display7SEG(index_led);
 
-	display7SEG(index_led);
-
-	index_led++;
-	if(index_led >= MAX_LED){
-		index_led = 0;
+		index_led++;
+		if(index_led >= MAX_LED){
+			index_led = 0;
+		}
 	}
 }

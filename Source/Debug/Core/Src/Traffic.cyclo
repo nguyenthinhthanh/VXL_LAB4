@@ -1,8 +1,9 @@
-../Core/Src/traffic.c:17:6:doRedGreen_Traffic	1
-../Core/Src/traffic.c:29:6:doRedYellow_Traffic	1
-../Core/Src/traffic.c:35:6:doGreenRed_Traffic	1
-../Core/Src/traffic.c:45:6:doYellowRed_Traffic	1
-../Core/Src/traffic.c:53:5:getTimeFlag	1
-../Core/Src/traffic.c:57:6:clearTimeFlag	1
-../Core/Src/traffic.c:61:6:runTime	1
-../Core/Src/traffic.c:65:6:runTraffic	11
+../Core/Src/traffic.c:17:6:clearAllTraffic	1
+../Core/Src/traffic.c:27:6:doRedGreen_Traffic	1
+../Core/Src/traffic.c:39:6:doRedYellow_Traffic	1
+../Core/Src/traffic.c:45:6:doGreenRed_Traffic	1
+../Core/Src/traffic.c:55:6:doYellowRed_Traffic	1
+../Core/Src/traffic.c:63:5:getTimeFlag	1
+../Core/Src/traffic.c:67:6:clearTimeFlag	1
+../Core/Src/traffic.c:71:6:runTime	1
+../Core/Src/traffic.c:75:6:runTraffic	11

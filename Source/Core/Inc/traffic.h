@@ -25,6 +25,8 @@ extern int Led24_Count;
 extern int state_traffic;
 extern int time_flag;
 
+void clearAllTraffic(void);
+
 void doRedGreen_Traffic(void);
 
 void doRedYellow_Traffic(void);

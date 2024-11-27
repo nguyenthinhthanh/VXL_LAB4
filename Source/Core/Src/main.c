@@ -63,6 +63,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 /* USER CODE BEGIN 0 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	button_reading();
+	runTimer();
 	SCH_Update();
 }
 /* USER CODE END 0 */
@@ -105,19 +106,21 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   //__HAL_RCC_GPIOB_CLK_ENABLE();
 
+  setEnviromentState0();
   SCH_Init();
 
-  //SCH_Add_Task(fsm_for_input_processing, 0, 500, 0);
-  //SCH_Add_Task(run7Seg, 0, 250, 0);
-  //SCH_Add_Task(runBlinkingLed, 0, 10, 0);
+  //SCH_Add_Task(fsm_for_input_processing, 0, 10, 0);
+  SCH_Add_Task(run7Seg, 0, 250, 0);
 
   //SCH_Add_Task(runLed, 0, 500, 0);
   //SCH_Add_Task(run7Seg, 0, 500, 0);
   SCH_Add_Task(runTime, 0, 1000, 0);
   SCH_Add_Task(runTraffic, 1000, 1000, 0);
 
-  //SCH_Add_Task(fsm_automatic, 0, 500, 0);
-  //SCH_Add_Task(fsm_manual, 0, 10, 0);
+  //SCH_Add_Task(fsm_automatic, 0, 100, 0);
+  //SCH_Add_Task(fsm_manual, 0, 100, 0);
+
+  //SCH_Add_Task(runBlinkingLed, 0, 100, 0);
   //SCH_Add_Task(fsm_setting, 0, 10, 0);
   //get_List();
 
@@ -127,6 +130,7 @@ int main(void)
 	 fsm_for_input_processing();
 	 fsm_automatic();
 	 fsm_manual();
+	 runBlinkingLed();
 	 SCH_Dispatch_Task();
     /* USER CODE END WHILE */
 

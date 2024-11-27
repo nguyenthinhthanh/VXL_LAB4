@@ -11,12 +11,20 @@ int TIMER_CYCLE = 10;
 int COUNTER		= 9;
 int PRESCALER	= 7999;
 
+int Timer_Ignore[MAX_TIMER] = {0};
 int Timer_Flag[MAX_TIMER] = {0};
 int Timer_Counter[MAX_TIMER] = {0};
 
-
 int getTimerFlags(int index){
 	return Timer_Flag[index];
+}
+
+void ignoreTimer(int index){
+	Timer_Ignore[index] = 1;
+}
+
+void activeTimer(int index){
+	Timer_Ignore[index] = 0;
 }
 
 void setTimer(int index, int duration){
@@ -26,6 +34,10 @@ void setTimer(int index, int duration){
 
 void runTimer(void){
 	for(int i=0;i<MAX_TIMER;i++){
+		if(Timer_Ignore[i]){
+			continue;
+		}
+
 		Timer_Counter[i]--;
 		if(Timer_Counter[i] <= 0){
 			Timer_Flag[i] = 1;

@@ -58,6 +58,26 @@ void setEnviromentState0(void){
 
 	setTimer(DELAY_TIMER, 0);
 	setTimer(TRAFFIC_TIMER, 3000);*/
+
+	Led13_Count = 5;
+	Led24_Count = 3;
+
+	/*Enable 7Seg we use and disable 7Seg we not use*/
+	disable7SEG(1);
+	disable7SEG(2);
+	enable7SEGNoClear(0);
+	enable7SEGNoClear(3);
+
+	/*7Seg display immediate*/
+	display7SEG_13(Led13_Count);
+	display7SEG_24(Led24_Count);
+
+	ignoreTimer(BLINKING_LED_RED_TIMER);
+	ignoreTimer(BLINKING_LED_YELLOW_TIMER);
+	ignoreTimer(BLINKING_LED_GREEN_TIMER);
+
+	state_traffic = RED_GREEN_STATE;
+	FSM_State = RED_GREEN_STATE_MODE1;
 }
 
 void setEnviromentState1(void){
@@ -83,6 +103,8 @@ void setEnviromentState4(void){
 	ignoreTimer(TRAFFIC_TIMER);
 
 	activeTimer(SEVENT_SEG_SCAN_TIMER);*/
+
+	clearAllTraffic();
 }
 
 void setEnviromentState5(void){
@@ -91,6 +113,8 @@ void setEnviromentState5(void){
 	Ignore timer delay and timer traffic
 	ignoreTimer(DELAY_TIMER);
 	ignoreTimer(TRAFFIC_TIMER);*/
+
+	clearAllTraffic();
 }
 
 void setEnviromentState6(void){
@@ -99,6 +123,8 @@ void setEnviromentState6(void){
 	Ignore timer delay and timer traffic
 	ignoreTimer(DELAY_TIMER);
 	ignoreTimer(TRAFFIC_TIMER);*/
+
+	clearAllTraffic();
 }
 
 void doState0(void){
