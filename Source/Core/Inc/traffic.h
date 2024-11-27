@@ -23,6 +23,7 @@ extern int Led13_Count;
 extern int Led24_Count;
 
 extern int state_traffic;
+extern int time_flag;
 
 void doRedGreen_Traffic(void);
 
@@ -32,7 +33,11 @@ void doGreenRed_Traffic(void);
 
 void doYellowRed_Traffic(void);
 
-void runLed(void);
+int getTimeFlag(void);
+
+void clearTimeFlag(void);
+
+void runTime(void);
 
 void runTraffic(void);
 

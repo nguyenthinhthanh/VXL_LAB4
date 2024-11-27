@@ -12,6 +12,7 @@ int Led13_Count = 5;
 int Led24_Count = 3;
 
 int state_traffic = RED_GREEN_STATE;
+int time_flag = 0;
 
 void doRedGreen_Traffic(void){
 	HAL_GPIO_WritePin(LED13_RED_GPIO_Port, LED13_RED_Pin, GPIO_PIN_SET);
@@ -49,22 +50,16 @@ void doYellowRed_Traffic(void){
 	HAL_GPIO_WritePin(LED24_RED_GPIO_Port, LED24_RED_Pin, GPIO_PIN_SET);
 }
 
-void runLed(void){
-	if(state_traffic == RED_GREEN_STATE){
-		doRedGreen_Traffic();
-	}
-	else if(state_traffic == RED_YELLOW_STATE){
-		doRedYellow_Traffic();
-	}
-	else if(state_traffic == GREEN_RED_STATE){
-		doGreenRed_Traffic();
-	}
-	else if(state_traffic == YELLOW_RED_STATE){
-		doYellowRed_Traffic();
-	}
-	else{
-		/*This is fault state*/
-	}
+int getTimeFlag(void){
+	return time_flag;
+}
+
+void clearTimeFlag(void){
+	time_flag = 0;
+}
+
+void runTime(void){
+	time_flag = 1;
 }
 
 void runTraffic(void){

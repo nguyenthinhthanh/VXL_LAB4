@@ -25,7 +25,11 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  ../Core/Inc/7Seg.h ../Core/Inc/main.h ../Core/Inc/Timer.h \
  ../Core/Inc/Traffic.h ../Core/Inc/Traffic.h ../Core/Inc/schedule.h \
- ../Core/Inc/error.h
+ ../Core/Inc/error.h ../Core/Inc/input_reading.h \
+ ../Core/Inc/led_display.h ../Core/Inc/input_processing.h \
+ ../Core/Inc/input_reading.h ../Core/Inc/fsm.h ../Core/Inc/traffic.h \
+ ../Core/Inc/blinking_led.h ../Core/Inc/fsm.h \
+ ../Core/Inc/input_processing.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Core/Inc/stm32f1xx_hal_conf.h:
@@ -58,3 +62,12 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/Traffic.h:
 ../Core/Inc/schedule.h:
 ../Core/Inc/error.h:
+../Core/Inc/input_reading.h:
+../Core/Inc/led_display.h:
+../Core/Inc/input_processing.h:
+../Core/Inc/input_reading.h:
+../Core/Inc/fsm.h:
+../Core/Inc/traffic.h:
+../Core/Inc/blinking_led.h:
+../Core/Inc/fsm.h:
+../Core/Inc/input_processing.h:

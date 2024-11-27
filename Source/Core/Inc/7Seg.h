@@ -12,13 +12,13 @@
 #include "Timer.h"
 #include "Traffic.h"
 
-extern int Led13_Count;
+/*extern int Led13_Count;
 extern int Led24_Count;
 
 void  display7SEG_13(int number);
 
 void  display7SEG_24(int number);
 
-void run7Seg(void);
+void run7Seg(void);*/
 
 #endif /* INC_7SEG_H_ */

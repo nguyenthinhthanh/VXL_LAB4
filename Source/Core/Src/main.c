@@ -107,22 +107,26 @@ int main(void)
 
   SCH_Init();
 
-  SCH_Add_Task(fsm_for_input_processing, 0, 10, 0);
-  SCH_Add_Task(run7Seg, 0, 250, 0);
+  //SCH_Add_Task(fsm_for_input_processing, 0, 500, 0);
+  //SCH_Add_Task(run7Seg, 0, 250, 0);
   //SCH_Add_Task(runBlinkingLed, 0, 10, 0);
 
   //SCH_Add_Task(runLed, 0, 500, 0);
   //SCH_Add_Task(run7Seg, 0, 500, 0);
+  SCH_Add_Task(runTime, 0, 1000, 0);
   SCH_Add_Task(runTraffic, 1000, 1000, 0);
 
-  SCH_Add_Task(fsm_automatic, 0, 10, 0);
-  SCH_Add_Task(fsm_manual, 0, 10, 0);
-  SCH_Add_Task(fsm_setting, 0, 10, 0);
+  //SCH_Add_Task(fsm_automatic, 0, 500, 0);
+  //SCH_Add_Task(fsm_manual, 0, 10, 0);
+  //SCH_Add_Task(fsm_setting, 0, 10, 0);
   //get_List();
 
   HAL_TIM_Base_Start_IT(&htim2);
   while (1)
   {
+	 fsm_for_input_processing();
+	 fsm_automatic();
+	 fsm_manual();
 	 SCH_Dispatch_Task();
     /* USER CODE END WHILE */
 
@@ -234,7 +238,8 @@ static void MX_GPIO_Init(void)
                           |SEG24_F_Pin|SEG24_G_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, LED13_RED_Pin|LED13_YELLOW_Pin|LED13_GREEN_Pin|LED24_RED_Pin
+  HAL_GPIO_WritePin(GPIOB, EN0_Pin|EN1_Pin|EN2_Pin|EN3_Pin
+                          |LED13_RED_Pin|LED13_YELLOW_Pin|LED13_GREEN_Pin|LED24_RED_Pin
                           |LED24_YELLOW_Pin|LED24_GREEN_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : SEG13_A_Pin SEG13_B_Pin SEG13_C_Pin SEG13_D_Pin
@@ -250,9 +255,17 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : LED13_RED_Pin LED13_YELLOW_Pin LED13_GREEN_Pin LED24_RED_Pin
+  /*Configure GPIO pins : BUTTON_0_Pin BUTTON_1_Pin BUTTON_2_Pin */
+  GPIO_InitStruct.Pin = BUTTON_0_Pin|BUTTON_1_Pin|BUTTON_2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : EN0_Pin EN1_Pin EN2_Pin EN3_Pin
+                           LED13_RED_Pin LED13_YELLOW_Pin LED13_GREEN_Pin LED24_RED_Pin
                            LED24_YELLOW_Pin LED24_GREEN_Pin */
-  GPIO_InitStruct.Pin = LED13_RED_Pin|LED13_YELLOW_Pin|LED13_GREEN_Pin|LED24_RED_Pin
+  GPIO_InitStruct.Pin = EN0_Pin|EN1_Pin|EN2_Pin|EN3_Pin
+                          |LED13_RED_Pin|LED13_YELLOW_Pin|LED13_GREEN_Pin|LED24_RED_Pin
                           |LED24_YELLOW_Pin|LED24_GREEN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;

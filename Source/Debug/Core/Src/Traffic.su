@@ -1,6 +1,8 @@
-../Core/Src/Traffic.c:16:6:doRedGreen_Traffic	8	static
-../Core/Src/Traffic.c:28:6:doRedYellow_Traffic	8	static
-../Core/Src/Traffic.c:34:6:doGreenRed_Traffic	8	static
-../Core/Src/Traffic.c:44:6:doYellowRed_Traffic	8	static
-../Core/Src/Traffic.c:52:6:runLed	8	static
-../Core/Src/Traffic.c:70:6:runTraffic	4	static
+../Core/Src/traffic.c:17:6:doRedGreen_Traffic	8	static
+../Core/Src/traffic.c:29:6:doRedYellow_Traffic	8	static
+../Core/Src/traffic.c:35:6:doGreenRed_Traffic	8	static
+../Core/Src/traffic.c:45:6:doYellowRed_Traffic	8	static
+../Core/Src/traffic.c:53:5:getTimeFlag	4	static
+../Core/Src/traffic.c:57:6:clearTimeFlag	4	static
+../Core/Src/traffic.c:61:6:runTime	4	static
+../Core/Src/traffic.c:65:6:runTraffic	4	static

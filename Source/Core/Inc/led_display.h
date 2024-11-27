@@ -13,8 +13,8 @@
 
 #define	DURATION_FOR_SEVENT_SEG_SCAN_LED	250	/*250ms for scanning 7Seg led*/
 
-extern int Led13_Count;
-extern int Led24_Count;
+/*extern int Led13_Count;
+extern int Led24_Count;*/
 
 void updateLedBuffer(int index, int value);
 

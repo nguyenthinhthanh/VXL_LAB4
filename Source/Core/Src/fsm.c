@@ -11,100 +11,100 @@
 int FSM_State;
 
 void setEnviromentStateInit(void){
-	Led13_Count = 5;
+	/*Led13_Count = 5;
 	Led24_Count = 3;
 
-	/*Update 7Seg buffer for scanning*/
+	Update 7Seg buffer for scanning
 	updateLedBuffer(0, Led13_Count);
-	updateLedBuffer(1, 0);				/*In mode 1,2 this 7Seg is 0*/
-	updateLedBuffer(2, 0);				/*In mode 1,2 this 7Seg is 0*/
+	updateLedBuffer(1, 0);				In mode 1,2 this 7Seg is 0
+	updateLedBuffer(2, 0);				In mode 1,2 this 7Seg is 0
 	updateLedBuffer(3, Led24_Count);
 
-	/*Set timer for blinking led*/
+	Set timer for blinking led
 	setTimer(BLINKING_LED_RED_TIMER, (Time_LedRed_Duration * TIME_SCALER)/2);
 	setTimer(BLINKING_LED_YELLOW_TIMER, (Time_LedYellow_Duration * TIME_SCALER)/2);
 	setTimer(BLINKING_LED_GREEN_TIMER, (Time_LedGreen_Duration * TIME_SCALER)/2);
 
 	setEnviromentState0();
-	FSM_State = RED_GREEN_STATE_MODE1;
+	FSM_State = RED_GREEN_STATE_MODE1;*/
 }
 
 void setEnviromentState0(void){
-	Led13_Count = 5;
+	/*Led13_Count = 5;
 	Led24_Count = 3;
 
-	/*Enable 7Seg we use and disable 7Seg we not use*/
+	Enable 7Seg we use and disable 7Seg we not use
 	disable7SEG(1);
 	disable7SEG(2);
 	enable7SEGNoClear(0);
 	enable7SEGNoClear(3);
 
-	/*7Seg display immediate*/
+	7Seg display immediate
 	display7SEG_13(Led13_Count);
 	display7SEG_24(Led24_Count);
 
-	/*Active timer*/
+	Active timer
 	activeTimer(DELAY_TIMER);
 	activeTimer(TRAFFIC_TIMER);
 	ignoreTimer(BLINKING_LED_RED_TIMER);
 	ignoreTimer(BLINKING_LED_YELLOW_TIMER);
 	ignoreTimer(BLINKING_LED_GREEN_TIMER);
 
-	/*We not use scanning 7Seg in Mode 1*/
+	We not use scanning 7Seg in Mode 1
 	ignoreTimer(SEVENT_SEG_SCAN_TIMER);
 
-	/*Set timer for scanning 7Seg for reset counter value*/
+	Set timer for scanning 7Seg for reset counter value
 	setTimer(SEVENT_SEG_SCAN_TIMER, DURATION_FOR_SEVENT_SEG_SCAN_LED);
 
 	setTimer(DELAY_TIMER, 0);
-	setTimer(TRAFFIC_TIMER, 3000);
+	setTimer(TRAFFIC_TIMER, 3000);*/
 }
 
 void setEnviromentState1(void){
-	Led24_Count = 2;
-	setTimer(TRAFFIC_TIMER, 2000);
+	//Led24_Count = 2;
+	//setTimer(TRAFFIC_TIMER, 2000);
 }
 void setEnviromentState2(void){
-	Led13_Count = 3;
+	/*Led13_Count = 3;
 	Led24_Count = 5;
-	setTimer(TRAFFIC_TIMER, 3000);
+	setTimer(TRAFFIC_TIMER, 3000);*/
 }
 
 void setEnviromentState3(void){
-	Led13_Count = 2;
-	setTimer(TRAFFIC_TIMER, 2000);
+	/*Led13_Count = 2;
+	setTimer(TRAFFIC_TIMER, 2000);*/
 }
 
 void setEnviromentState4(void){
 	/*Clear all traffic led in mode 1*/
-	clearAllTraffic();
-	/*Ignore timer delay and timer traffic*/
+	/*clearAllTraffic();
+	Ignore timer delay and timer traffic
 	ignoreTimer(DELAY_TIMER);
 	ignoreTimer(TRAFFIC_TIMER);
 
-	activeTimer(SEVENT_SEG_SCAN_TIMER);
+	activeTimer(SEVENT_SEG_SCAN_TIMER);*/
 }
 
 void setEnviromentState5(void){
-	/*Clear all traffic led in mode 1*/
+	/*Clear all traffic led in mode 1
 	clearAllTraffic();
-	/*Ignore timer delay and timer traffic*/
+	Ignore timer delay and timer traffic
 	ignoreTimer(DELAY_TIMER);
-	ignoreTimer(TRAFFIC_TIMER);
+	ignoreTimer(TRAFFIC_TIMER);*/
 }
 
 void setEnviromentState6(void){
-	/*Clear all traffic led in mode 1*/
+	/*Clear all traffic led in mode 1
 	clearAllTraffic();
-	/*Ignore timer delay and timer traffic*/
+	Ignore timer delay and timer traffic
 	ignoreTimer(DELAY_TIMER);
-	ignoreTimer(TRAFFIC_TIMER);
+	ignoreTimer(TRAFFIC_TIMER);*/
 }
 
 void doState0(void){
 	doRedGreen_Traffic();
 
-	if(getTimerFlags(DELAY_TIMER)){
+	if(getTimeFlag()){
 
 		/*Just for debug
 		HAL_GPIO_WritePin(CHECK_GPIO_Port, CHECK_Pin, GPIO_PIN_RESET);*/
@@ -112,64 +112,64 @@ void doState0(void){
 		display7SEG_13(Led13_Count);
 		display7SEG_24(Led24_Count);
 
-		Led13_Count--;
-		Led24_Count--;
+		/*Led13_Count--;
+		Led24_Count--;*/
 
 		//updateLedBuffer(0, Led13_Count);
 		//updateLedBuffer(3, Led24_Count);
 
-		setTimer(DELAY_TIMER, 1000);
+		clearTimeFlag();
 	}
 }
 
 void doState1(void){
 	doRedYellow_Traffic();
 
-	if(getTimerFlags(DELAY_TIMER)){
+	if(getTimeFlag()){
 		display7SEG_13(Led13_Count);
 		display7SEG_24(Led24_Count);
 
-		Led13_Count--;
-		Led24_Count--;
+		/*Led13_Count--;
+		Led24_Count--;*/
 
 		//updateLedBuffer(0, Led13_Count);
 		//updateLedBuffer(3, Led24_Count);
 
-		setTimer(DELAY_TIMER, 1000);
+		clearTimeFlag();
 	}
 }
 
 void doState2(void){
 	doGreenRed_Traffic();
 
-	if(getTimerFlags(DELAY_TIMER)){
+	if(getTimeFlag()){
 		display7SEG_13(Led13_Count);
 		display7SEG_24(Led24_Count);
 
-		Led13_Count--;
-		Led24_Count--;
+		/*Led13_Count--;
+		Led24_Count--;*/
 
 		//updateLedBuffer(0, Led13_Count);
 		//updateLedBuffer(3, Led24_Count);
 
-		setTimer(DELAY_TIMER, 1000);
+		clearTimeFlag();
 	}
 }
 
 void doState3(void){
 	doYellowRed_Traffic();
 
-	if(getTimerFlags(DELAY_TIMER)){
+	if(getTimeFlag()){
 		display7SEG_13(Led13_Count);
 		display7SEG_24(Led24_Count);
 
-		Led13_Count--;
-		Led24_Count--;
+		/*Led13_Count--;
+		Led24_Count--;*/
 
 		//updateLedBuffer(0, Led13_Count);
 		//updateLedBuffer(3, Led24_Count);
 
-		setTimer(DELAY_TIMER, 1000);
+		clearTimeFlag();
 	}
 }
 
@@ -197,7 +197,7 @@ void doState4(void){
 	if(buttonState[2] == BUTTON_PRESSED){
 		/*Update blinking time duration*/
 		Time_LedRed_Duration = Time_LedRed_Duration_Temp;
-		setTimer(BLINKING_LED_RED_TIMER, (Time_LedRed_Duration * TIME_SCALER)/2);
+		//setTimer(BLINKING_LED_RED_TIMER, (Time_LedRed_Duration * TIME_SCALER)/2);
 	}
 }
 
@@ -226,7 +226,7 @@ void doState5(void){
 	if(buttonState[2] == BUTTON_PRESSED){
 		/*Update blinking time duration*/
 		Time_LedYellow_Duration = Time_LedYellow_Duration_Temp;
-		setTimer(BLINKING_LED_YELLOW_TIMER, (Time_LedGreen_Duration * TIME_SCALER)/2);
+		//setTimer(BLINKING_LED_YELLOW_TIMER, (Time_LedGreen_Duration * TIME_SCALER)/2);
 	}
 }
 
@@ -255,94 +255,8 @@ void doState6(void){
 	if(buttonState[2] == BUTTON_PRESSED){
 		/*Update blinking time duration*/
 		Time_LedGreen_Duration = Time_LedGreen_Duration_Temp;
-		setTimer(BLINKING_LED_GREEN_TIMER, (Time_LedGreen_Duration * TIME_SCALER)/2);
+		//setTimer(BLINKING_LED_GREEN_TIMER, (Time_LedGreen_Duration * TIME_SCALER)/2);
 	}
-}
-
-
-void runFSM(void){
-	switch(FSM_State){
-	case RED_GREEN_STATE_MODE1:
-		doState0();
-
-		if(getTimerFlags(TRAFFIC_TIMER)){
-			setEnviromentState1();
-			FSM_State = RED_YELLOW_STATE_MODE1;
-		}
-
-		if(is_button_pressed(0)){
-			setEnviromentState4();	/*Mode 2*/
-			FSM_State = NORMAL_STATE_MODE_2;
-		}
-		break;
-	case RED_YELLOW_STATE_MODE1:
-		doState1();
-
-		if(getTimerFlags(TRAFFIC_TIMER)){
-			setEnviromentState2();
-			FSM_State = GREEN_RED_STATE_MODE1;
-		}
-
-		if(buttonState[0] == BUTTON_PRESSED){
-			setEnviromentState4();	/*Mode 2*/
-			FSM_State = NORMAL_STATE_MODE_2;
-		}
-		break;
-	case GREEN_RED_STATE_MODE1:
-		doState2();
-
-		if(getTimerFlags(TRAFFIC_TIMER)){
-			setEnviromentState3();
-			FSM_State = YELLOW_RED_STATE_MODE1;
-		}
-
-		if(buttonState[0] == BUTTON_PRESSED){
-			setEnviromentState4();	/*Mode 2*/
-			FSM_State = NORMAL_STATE_MODE_2;
-		}
-		break;
-	case YELLOW_RED_STATE_MODE1:
-		doState3();
-
-		if(getTimerFlags(TRAFFIC_TIMER)){
-			setEnviromentState0();
-			FSM_State = RED_GREEN_STATE_MODE1;
-		}
-
-		if(buttonState[0] == BUTTON_PRESSED){
-			setEnviromentState4();	/*Mode 2*/
-			FSM_State = NORMAL_STATE_MODE_2;
-		}
-		break;
-	case NORMAL_STATE_MODE_2:
-		doState4();
-
-		if(buttonState[0] == BUTTON_PRESSED){
-			setEnviromentState5();	/*Mode 3*/
-			FSM_State = NORMAL_STATE_MODE_3;
-		}
-		break;
-	case NORMAL_STATE_MODE_3:
-		doState5();
-
-		if(buttonState[0] == BUTTON_PRESSED){
-			setEnviromentState6();	/*Mode 4*/
-			FSM_State = NORMAL_STATE_MODE_4;
-		}
-		break;
-	case NORMAL_STATE_MODE_4:
-		doState6();
-
-		if(buttonState[0] == BUTTON_PRESSED){
-			setEnviromentState0();	/*Mode 1*/
-			FSM_State = RED_GREEN_STATE_MODE1;
-		}
-		break;
-	default:
-		break;
-	}
-
-	return;
 }
 
 void fsm_automatic(){
@@ -440,5 +354,5 @@ void fsm_manual(){
 }
 
 void fsm_setting(){
-
+	return;
 }

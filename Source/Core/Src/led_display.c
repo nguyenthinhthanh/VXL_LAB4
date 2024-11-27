@@ -9,8 +9,8 @@
 
 const int MAX_LED = 4;
 
-int Led13_Count;
-int Led24_Count;
+/*int Led13_Count;
+int Led24_Count;*/
 
 int index_led = 0;
 int led_buffer[4] = {5,0,0,3};
